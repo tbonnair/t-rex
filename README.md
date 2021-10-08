@@ -1,5 +1,7 @@
 # T-ReX: a graph-based method for cosmic filament detection
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 This git provides a python version of the T-ReX algorithm presented in two papers: 
 - https://arxiv.org/abs/1912.00732 exposes the first version in the context of the identification of filaments in cosmological datasets,
 - https://arxiv.org/abs/2106.09035 deepen the formalism and make it able to deal with noise, multiple scales and proposes a graph topology based on multiple minimum spanning trees.
