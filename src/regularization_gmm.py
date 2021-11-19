@@ -674,8 +674,6 @@ def regGMM(data, F, param, computeObj=0, display_progress_bar=0, step_update_gra
             if param.background_noise:
                 alpha = 1/len(data) * np.sum(R_bn)
                 pi_k = (1-alpha)/K
-
-            t1 += time.time() - t0
             
         if verbose >= 1:
             time_update = time.time()
@@ -684,6 +682,8 @@ def regGMM(data, F, param, computeObj=0, display_progress_bar=0, step_update_gra
         if verbose >= 1:
             print('New F computed in {} seconds'.format(time.time() - time_it))
 
+        t1 += time.time() - t0
+        
 #        if t < maxT:
         if t%step_update_graph == 0 and t > 0 or t<=3:
             #Put lambda to its value
