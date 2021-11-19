@@ -18,7 +18,6 @@ import GMM_utils as gutil
 import h5py
 
 #For preprocessing of data
-from sklearn.preprocessing import normalize
 from sklearn.utils import resample
 from sklearn.neighbors import KDTree, NearestNeighbors
 
@@ -47,7 +46,7 @@ class regGraph_():
         self.alpha = 0      #Amplitude of the background noise
 
         self.edges = []     #List of edges of the regularised graph
-        self.responsabilities = 0   #Responsability matrix    #DEBUG
+        self.responsibilities = 0   #Responsibility matrix    #DEBUG
 
 class param_:
     #Class for set of parameters of the algorithm
@@ -384,7 +383,7 @@ def _computeResponsibilityMatrix(data, F, sig, pi_k, kdtree_X, covariance_type, 
         else:
             Rtot = R
 
-        #Normalize responsabilities (GMM)
+        #Normalize responsibilities (GMM)
         sc = np.array(Rtot.sum(1).T)[0]
         R.data /= sc[R.row]
 
@@ -427,7 +426,7 @@ def _computeResponsibilityMatrix(data, F, sig, pi_k, kdtree_X, covariance_type, 
         cols = np.hstack(cols)
         R = sp.coo_matrix((vals, (rows, cols)), shape=(N, K))
 
-        #Normalize responsabilities (GMM)
+        #Normalize responsibilities (GMM)
         sc = np.array(R.sum(1).T)[0]
         R.data /= sc[R.row]
 
@@ -675,6 +674,8 @@ def regGMM(data, F, param, computeObj=0, display_progress_bar=0, step_update_gra
             if param.background_noise:
                 alpha = 1/len(data) * np.sum(R_bn)
                 pi_k = (1-alpha)/K
+
+            t1 += time.time() - t0
             
         if verbose >= 1:
             time_update = time.time()
@@ -682,9 +683,6 @@ def regGMM(data, F, param, computeObj=0, display_progress_bar=0, step_update_gra
 
         if verbose >= 1:
             print('New F computed in {} seconds'.format(time.time() - time_it))
-
-	
-        t1 += time.time() - t0
 
 #        if t < maxT:
         if t%step_update_graph == 0 and t > 0 or t<=3:
@@ -753,35 +751,12 @@ def regGMM(data, F, param, computeObj=0, display_progress_bar=0, step_update_gra
     regGraph.pi_k = pi_k
     regGraph.F = F
     regGraph.edges = edges_span
-    regGraph.responsabilities = R
+    regGraph.responsibilities = (R, R_bn)
 
     print('Time in E-step: {:.3f}'.format(t2))
     print('Time in M-step: {:.3f}'.format(t1))
 
     return regGraph, objectives, vecMov, adj
-
-
-def findEigPassing1(data, M, cov, L, lam):
-
-    kron_C = np.kron(cov, np.eye(len(M)))
-    kron_L = sp.kron(np.eye(len(data.T)), L)
-
-    ss = np.logspace(-3, 1.5, 250)   #Vector of sigma value to test
-
-    all_vp = []
-    max_vp = []
-    for sig in ss:
-        to_inv = np.eye(len(M)*len(data.T))*sig + 2*lam*len(M)*sig**2 / len(data) * kron_L
-        inv = np.linalg.inv(to_inv)
-        mat = (kron_C - 1/len(M) * np.kron(cov, np.ones((len(M), len(M))))) @ inv
-
-        vp, vect_p = sp.linalg.eigsh(mat, k=3, which='LA')      #k largest eigs
-        max_vp.append(vp[-1])       #Take only the largest (-2 takes the 2nd, etc..)
-
-    max_vp = np.array(max_vp)
-    all_vp.append(max_vp)
-
-    return ss[np.argmin(np.abs(max_vp-1))]
 
 
 def bootstrap(data, param, display_progress_bar=0):
@@ -1266,7 +1241,7 @@ def filamentFinding(data, regGraph, param, key='weight', type='all'):
 
     if verbose > 1:
         t4 = time.time()
-        print('filamentFinding -- Responsabilities computed in {:.2f} secs'.format(t4-t3))
+        print('filamentFinding -- responsibilities computed in {:.2f} secs'.format(t4-t3))
 
     #zi is the affiliation of datapoints to Gaussian clusters
     #Since we have the affiliation of clusters to filament, we can link both information
