@@ -1,0 +1,12 @@
+LICENSE
+README.md
+setup.py
+src/trex_python/GMM_utils.py
+src/trex_python/__init__.py
+src/trex_python/networkAlgo.py
+src/trex_python/regularization_gmm.py
+src/trex_python/utility.py
+src/trex_python.egg-info/PKG-INFO
+src/trex_python.egg-info/SOURCES.txt
+src/trex_python.egg-info/dependency_links.txt
+src/trex_python.egg-info/top_level.txt

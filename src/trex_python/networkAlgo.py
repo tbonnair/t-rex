@@ -10,7 +10,7 @@ from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
 from sklearn.mixture import BayesianGaussianMixture
 import time
-import utility
+import trex_python.utility as utility
 from scipy.spatial import Delaunay, cKDTree
 import scipy.sparse as sp
 from tqdm import tqdm

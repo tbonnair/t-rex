@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: trex-python
+Version: 0.1.2
+Summary: A Python implementation of the T-ReX algorithm
+Home-page: https://git.ias.u-psud.fr/tbonnair/t-rex.git
+Author: Tony Bonnaire
+Author-email: bonnaire.tonyim@gmail.com
+License: GNU General Public License v3.0
+Platform: UNKNOWN
+Requires-Python: >=3.7
+License-File: LICENSE
+
+UNKNOWN
+

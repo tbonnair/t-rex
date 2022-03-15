@@ -5,7 +5,7 @@ from scipy import sparse as sp
 import pandas as pd
 
 #To handle graphs
-import networkAlgo as na
+import trex_python.networkAlgo as na
 import igraph as ig
 
 #Gestion of functions
@@ -13,8 +13,8 @@ from tqdm import tqdm
 import time
 
 #Some utility functions
-import utility
-import GMM_utils as gutil
+import trex_python.utility as utility
+import trex_python.GMM_utils as gutil
 import h5py
 
 #For preprocessing of data
