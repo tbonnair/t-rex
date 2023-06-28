@@ -4,7 +4,7 @@
 
 **NEW:** You can now install T-ReX with all its dependencies using pip by running
 ```
-pip install trex-python.
+pip install trex-python
 ```
 
 This git provides a python version of the T-ReX algorithm presented in two papers: 
