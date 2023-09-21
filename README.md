@@ -9,7 +9,7 @@ pip install trex-python
 
 This git provides a python version of the T-ReX algorithm presented in two papers: 
 - https://arxiv.org/abs/1912.00732 exposes the first version in the context of the identification of filaments in cosmological datasets,
-- https://arxiv.org/abs/2106.09035 deepen the formalism and make it able to deal with noise, multiple scales and proposes a graph topology based on multiple minimum spanning trees.
+- https://arxiv.org/abs/2106.09035 deepens the formalism and make it able to deal with noise, multiple scales, and proposes a graph topology based on multiple minimum spanning trees to allow cycling topologies.
 
 
 
