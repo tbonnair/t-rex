@@ -11,7 +11,7 @@ setuptools.setup(
     description='A Python implementation of the T-ReX algorithm',
     url='https://git.ias.u-psud.fr/tbonnair/t-rex.git',
     author='Tony Bonnaire',
-    author_email='bonnaire.tonyim@gmail.com',
+    author_email='bonnaire.tony@gmail.com',
     license='GNU General Public License v3.0',
     package_dir={"": "src"},
     packages=pkgs,
